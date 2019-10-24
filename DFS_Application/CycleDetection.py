@@ -162,6 +162,6 @@ if __name__ == '__main__':
     CD.get_graph_information()
     CD.hasCycle()
     print("=======第二种========")
-    CD2 = CycleDetection_v2("../g.txt")
+    CD2 = CycleDetection_v2("../g_cycle.txt")
     CD2.get_graph_information()
     CD2.hasCycle()
