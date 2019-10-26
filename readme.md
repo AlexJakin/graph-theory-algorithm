@@ -110,20 +110,22 @@ BFS类中,和树的广度优先遍历类似，区别在于图的广度优先遍�
     bfs.get_BFSorder()
     
 > PS：此处可以注意到dfs和bfs的在非递归实现的相同之处,除了使用不同的数据结构存放遍历过程的数据外，其他基本相同
-> visited[0 .... v-1] = false
-> for v in range(self.V):
->   if visited[v] == False:   
->       search(v)
->
-> search(s):
->   x.push(s)
->   visited[s] = True
->   while !x.isEmplty():
->       v = x.pop()
->       for w in self.adj[w]:
->           if visited[w] == False:
->               x.push(w)
->               visited[w] = True
+ 
+     visited[0 .... v-1] = false
+     for v in range(self.V):
+       if visited[v] == False:   
+           search(v)
+    
+     search(s):
+       x.push(s)
+       visited[s] = True
+       while !x.isEmplty():
+           v = x.pop()
+           for w in self.adj[w]:
+               if visited[w] == False:
+                   x.push(w)
+                   visited[w] = True
+                   
 > 此处当x为栈时，为广度优先遍历，为队列的时候为深度优先遍历，除此之外还可以是随机队列等其他数据结构，发挥不同的作用
 
 #### 2.2 环检测
@@ -140,5 +142,22 @@ SingleSourcePath类中
     ssp.path(4)
     
 #### 2.4 二部图检测
+BiPartitionDetection类中
+
+    print("=====first graph======")
+    g = BiPartitionDetection("g.txt")
+    print(g.isBiPartite())
+    print("=====second graph======")
+    g = BiPartitionDetection("g2.txt")
+    print(g.isBiPartite())
+    print("=====third graph======")
+    g = BiPartitionDetection("g3.txt")
+    print(g.isBiPartite())
 
 #### 2.5 最短路径（注意！此处是无向无权图）
+USSSPath类中
+
+    usssp = USSSPath("../g_ssp.txt", 0)
+    usssp.get_graph_information()
+    usssp.path(6)
+    usssp.dis(6)
