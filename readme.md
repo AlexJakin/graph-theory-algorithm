@@ -161,3 +161,49 @@ USSSPath类中
     usssp.get_graph_information()
     usssp.path(6)
     usssp.dis(6)
+
+
+### 3. 桥 或 割边（cut edge）
+
+#### 3.1 判断v-w是否是桥？
+
+若通过w，能否从另外一条边回到v或者回到v之前的点，如果可以，不是桥，反之则为桥
+即 对于 v-w，low[w] > ord[v]，则v-w是桥 
+> 其中，ord数组表示顶点v在dfs中访问的顺序 
+
+> low数组表示对于对于某一个顶点，记录通过该顶点的另一条路能够到达的最小的ord
+
+在findBridges类中：
+
+    fb = findBridges("../g_bridges2.txt")
+    fb.get_graph_information()
+    fb.findBridges()
+
+    fb1 = findBridges("../tree.txt")
+    fb1.get_graph_information()
+    fb1.findBridges()
+    
+#### 3.2  DFS遍历树和BFS遍历树
+
+1. 对于DFS来说，非编历树边形成的是前向边，总是指向自己的祖先结点
+
+2. 对于BFS来说，非遍历树边形成的是后向边，也称横叉边，不会指向自己的祖先结点
+
+
+#### 3.3 割点
+
+> 对于无向图来说，如果删除一个顶点（顶点的邻边也删除），整个图的联通分量发生变换，这个点就叫割点
+
+判断：
+1. 如果不是根节点，如果点v有一个孩子结点w满足 low[w] >= ord[v]，则v是割点
+2. 如果是根节点，只要该结点孩子数大于1，则该根节点是割点
+
+在findCutPoint类中
+
+    fb = findCutPoint("../g_bridges2.txt")
+    fb.get_graph_information()
+    fb.findCutPoint()
+
+    fb1 = findCutPoint("../tree.txt")
+    fb1.get_graph_information()
+    fb1.findCutPoint()
