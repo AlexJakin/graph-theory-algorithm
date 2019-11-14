@@ -5,7 +5,7 @@ Graph theory algorithm python implementation，which has the base class of the a
 
 图论算法python实现，封装了图的邻接矩阵和邻接表的基础类，实现深度优先搜索（前序和后序）和广度优先搜索，图的各种应用方面的实现，哈密顿图，有向图算法，最短路径算法，欧拉回路和欧拉路径，网络流，匹配问题等等
 
-主要是我最近在推荐算法或者nlp的时候，遇到有不懂的，正在系统学习了一下图论，并实现一下
+主要是我最近在推荐算法或者nlp的时候，遇到有不懂的，借助bobo老师的课程系统学习了一下图论，并实现一下
 
 ### 2.环境
 
@@ -217,8 +217,9 @@ USSSPath类中
 3. 若此时已经回到顶点0了，并且所有顶点都已经访问过了，说明存在Hamilton Loop
 4. 如果在对每一个结点进行dfs的过程中找不到Hamilton Loop，则返回到上一个结点
 
-> 返回Hamilton Loop Path的存储变量是, pre
+> 返回Hamilton Loop Path的存储变量是, self.__pre
  
+在HamiltonLoop类中
 
     hl = HamiltonLoop("g.txt")
     hl.get_graph_information()
@@ -228,3 +229,16 @@ USSSPath类中
     hl.get_graph_information()
     hl.getHamiltonLoop()
 
+#### 4.2 哈密顿回路优化方法
+
+相对比4.1的Hamilton Loop algorithm 实现,这个实现方法不需要allVisited()函数判断是否已经全部访问过了，使用left变量来记录剩下的结点数
+
+在HamiltonLoopOptimization类中
+
+    hl = HamiltonLoopOptimization("g.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()
+
+    hl = HamiltonLoopOptimization("g2.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()
