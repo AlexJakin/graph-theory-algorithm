@@ -242,3 +242,19 @@ USSSPath类中
     hl = HamiltonLoopOptimization("g2.txt")
     hl.get_graph_information()
     hl.getHamiltonLoop()
+
+#### 4.3 哈密顿路径(hamilton Path Algorithm)
+
+和前面所求的哈密顿回路（Hamilton Loop）不同，这里不需要确保能够回到起点s，只需要遍历所有的顶点查到是否有一条路径使得从顶点s开始能够走完整个图即可
+
+注意，对于哈密顿路径来说，起点s的选取是很重要的，会影响最后的路径结果，甚至得不到路径
+
+在 HamiltonPath 类中
+
+    hl = HamiltonPath("g3.txt", 0)
+    hl.get_graph_information()
+    hl.getHamiltonPath()
+
+    hl = HamiltonPath("g3.txt", 1)
+    hl.get_graph_information()
+    hl.getHamiltonPath()
