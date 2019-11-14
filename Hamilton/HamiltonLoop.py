@@ -1,16 +1,16 @@
 """
 @author: Alex
 @contact: 1272296763@qq.com or jakinmili@gmail.com
-@file: AdjacencyList.py
+@file: HamiltonLoop.py
 @time: 2019/10/20 19:12
 """
-class AdjList:
+class HamiltonLoop:
 
     def __init__(self, filename):
         self.V = 0  # 顶点数
         self.E = 0  # 边数
         self.adj = None
-        self.__cccount = 0 # 联通分量
+
         with open(filename) as f:
             line_num = 0  # 第一行是顶点数和边数
             for line in f:
@@ -28,6 +28,10 @@ class AdjList:
                     self.adj[v1].append(v2)
                     self.adj[v2].append(v1)
                 line_num += 1
+        self.__visited = [False for i in range(self.V)]
+        self.__pre = [-1 for i in range(self.V)]
+        self.__end = -1
+        self.graphDFS(0,0)
 
     def get_graph_information(self):
         """
@@ -67,43 +71,49 @@ class AdjList:
         self.validateVertex(v)
         return len(self.adj[v])
 
+    def allVisited(self):
+        for v in range(self.V):
+            if self.__visited[v] == False:
+                return False
+        return True
 
-    def graphDFS(self):
-        visited = [False for i in range(self.V)]
-        pre_order = [] # 前序遍历结果
-        post_order = [] # 后序遍历结果
-        cccount = 0 # 联通分量
+    def graphDFS(self, v, parent):
 
-        def dfs(v):
-            # 标记v顶点已经遍历过了
-            visited[v] = True
-            # 添加
-            pre_order.append(v)
-            for w in self.adj[v]:
-                if visited[w] == False:
-                    dfs(w)
-                    # 此刻对某个顶点的邻点已经遍历结束
-            post_order.append(v)
+        # 标记v顶点已经遍历过了
+        self.__visited[v] = True
+        # 记录父亲结点
+        self.__pre[v] = parent
 
-        # 顾及到有多个联通分量，对每个顶点都做DFS
-        for i in range(self.V):
-            if visited[i] == False:
-                dfs(i)
-                cccount += 1
-        self.__cccount = cccount
-        return pre_order,post_order
+        for w in self.adj[v]:
+            if self.__visited[w] == False:
+                if self.graphDFS(w, v):
+                    return True
+            elif w == 0 and self.allVisited():
+                # 记录到达的最后一个结点
+                self.__end = v
+                return True
+        # 找不到HamiltonLoop，开始回溯到上一个结点
+        self.__visited[v] = False
+        return False
 
-    def get_cccount(self):
-        """
-        获取该图的联通分量
-        :return:
-        """
-        return self.__cccount
+    def getHamiltonLoop(self):
+        res = []
+        if self.__end == -1:
+            return res
+
+        cur = self.__end
+        while cur != 0:
+            res.append(cur)
+            cur = self.__pre[cur]
+        res.append(0)
+        res.reverse()
+        print(res)
 
 if __name__ == '__main__':
-    adjl = AdjList("../g.txt")
-    adjl.get_graph_information()
-    print(adjl.hasEdge(0,4))
-    print(adjl.degree(1))
-    print(adjl.graphDFS())
-    print(adjl.get_cccount())
+    hl = HamiltonLoop("g.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()
+
+    hl = HamiltonLoop("g2.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()

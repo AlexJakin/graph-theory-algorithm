@@ -207,3 +207,24 @@ USSSPath类中
     fb1 = findCutPoint("../tree.txt")
     fb1.get_graph_information()
     fb1.findCutPoint()
+
+### 4. 哈密顿图（Hamilton）
+
+#### 4.1 哈密顿回路（Hamilton Loop）
+
+1. 从顶点0开始dfs(0, 0)
+2. 对整个图模型进行dfs(w, v)，其中v是w的父亲结点，dfs(w, v)返回的是true，说明找到Hamilton Loop Path
+3. 若此时已经回到顶点0了，并且所有顶点都已经访问过了，说明存在Hamilton Loop
+4. 如果在对每一个结点进行dfs的过程中找不到Hamilton Loop，则返回到上一个结点
+
+> 返回Hamilton Loop Path的存储变量是, pre
+ 
+
+    hl = HamiltonLoop("g.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()
+
+    hl = HamiltonLoop("g2.txt")
+    hl.get_graph_information()
+    hl.getHamiltonLoop()
+
