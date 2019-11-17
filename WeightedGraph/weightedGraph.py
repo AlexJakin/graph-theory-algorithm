@@ -10,7 +10,6 @@ class weightedGraph:
         self.V = 0  # 顶点数
         self.E = 0  # 边数
         self.adj = None
-        self.__cccount = 0 # 联通分量
         with open(filename) as f:
             line_num = 0  # 第一行是顶点数和边数
             for line in f:
@@ -29,8 +28,7 @@ class weightedGraph:
                     self.adj[v1][v2] = w
                     self.adj[v2][v1] = w
                 line_num += 1
-        print(self.adj)
-        print(self.adj[0])
+
     def get_graph_information(self):
         """
         打印图的邻接表
@@ -58,7 +56,7 @@ class weightedGraph:
         """
         self.validateVertex(v)
         self.validateVertex(w)
-        return w in self.adj[v]
+        return w in self.adj[v].keys()
 
     def getWeight(self, v, w):
         if self.hasEdge(v, w):
@@ -74,39 +72,16 @@ class weightedGraph:
         return len(self.adj[v])
 
 
-    def graphDFS(self):
-        visited = [False for i in range(self.V)]
-        pre_order = [] # 前序遍历结果
-        post_order = [] # 后序遍历结果
-        cccount = 0 # 联通分量
-
-        def dfs(v):
-            # 标记v顶点已经遍历过了
-            visited[v] = True
-            # 添加
-            pre_order.append(v)
-            for w in self.adj[v]:
-                if visited[w] == False:
-                    dfs(w)
-                    # 此刻对某个顶点的邻点已经遍历结束
-            post_order.append(v)
-
-        # 顾及到有多个联通分量，对每个顶点都做DFS
-        for i in range(self.V):
-            if visited[i] == False:
-                dfs(i)
-                cccount += 1
-        self.__cccount = cccount
-        return pre_order,post_order
-
-    def get_cccount(self):
-        """
-        获取该图的联通分量
-        :return:
-        """
-        return self.__cccount
+    def removeEdge(self, v, w):
+        if self.hasEdge(v, w):
+            self.E -= 1
+        self.adj[v].pop(w)
+        self.adj[w].pop(v)
 
 if __name__ == '__main__':
     weighted_graph = weightedGraph("g.txt")
+    weighted_graph.get_graph_information()
     print(weighted_graph.getWeight(0, 1))
+    print(weighted_graph.hasEdge(0, 1))
+    print(weighted_graph.degree(0))
 

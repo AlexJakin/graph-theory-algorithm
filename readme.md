@@ -297,6 +297,12 @@ g2图：
 
 
 ### 5. 带权图
+在weightGraph类中
 
+    weighted_graph = weightedGraph("g.txt")
+    weighted_graph.get_graph_information()
+    print(weighted_graph.getWeight(0, 1))
+    print(weighted_graph.hasEdge(0, 1))
+    print(weighted_graph.degree(0))
 
-
+![img](img/weightedGraph/1.png)
