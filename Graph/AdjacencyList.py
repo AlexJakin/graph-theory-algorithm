@@ -28,6 +28,7 @@ class AdjList:
                     self.adj[v1].append(v2)
                     self.adj[v2].append(v1)
                 line_num += 1
+        print(self.adj)
 
     def get_graph_information(self):
         """

@@ -258,3 +258,45 @@ USSSPath类中
     hl = HamiltonPath("g3.txt", 1)
     hl.get_graph_information()
     hl.getHamiltonPath()
+    
+#### 4.4 欧拉回路（Euler Loop）
+
+##### 4.4.1 欧拉回路的存在性质
+
+在一个无向联通图中，每个点的度数为偶数 是 图存在欧拉回路的充要条件
+
+**证明：**：
+    1. 从某一点顶点出发，若该图是联通的且满足顶点的度数都为偶数，说明该图存在环
+    2. 如果这个环是原图，说明找到了欧拉回路，否则，剩下的边一定和找到的环相连（因为原图是联通的）
+    且所有顶点的度数都是偶数（因为在遍历完成一个顶点的过程中，总是会一进一出，所以会导致度数减2，
+    此时依然是偶数）。根据1，说明剩下的边一定存在环
+    3. 两个相连的环相连，一定组成一个新的环
+
+##### 4.4.1 欧拉回路的判断
+
+只需要抓住联通和度数来判断即可，满足以下条件即为Euler Loop
+1. 联通分量为1
+2. 度数为偶数
+
+
+    ELD = EulerLoopDetection("g.txt")
+    ELD.get_graph_information()
+    ELD.hasEulerLoop()
+
+    ELD2 = EulerLoopDetection("g2.txt")
+    ELD2.get_graph_information()
+    ELD2.hasEulerLoop()
+
+g2图：
+
+![img](img/Euler/g1.png)
+
+
+##### 4.4.2 欧拉回路路径（Hierholzer算法）
+待更~
+
+
+### 5. 带权图
+
+
+
